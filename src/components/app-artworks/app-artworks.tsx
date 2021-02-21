@@ -16,6 +16,7 @@ export class AppArtworks {
     limit: '50',
     lang: 'ja_jp',
     explicit: 'Yes',
+    dummy: 'rinrinrin4046',
   };
 
   @Prop() keyword: string;
