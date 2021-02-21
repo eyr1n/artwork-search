@@ -1,6 +1,7 @@
 import { Component, h, Prop, State, Watch, JSX } from '@stencil/core';
 import { loadingController } from '@ionic/core';
 import { saveAs } from 'file-saver';
+import { nanoid } from 'nanoid';
 
 @Component({
   tag: 'app-artworks',
@@ -16,7 +17,6 @@ export class AppArtworks {
     limit: '50',
     lang: 'ja_jp',
     explicit: 'Yes',
-    dummy: 'rinrinrin4046',
   };
 
   @Prop() keyword: string;
@@ -44,6 +44,7 @@ export class AppArtworks {
   async showArtworks() {
     const url = new URL(this.baseUrl.href);
     url.searchParams.append('term', this.keyword);
+    url.searchParams.append('dummy', nanoid(8));
     const data = await this.getFromApi(url.href);
 
     this.artworks = data.map(item => {
