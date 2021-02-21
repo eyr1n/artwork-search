@@ -12,11 +12,8 @@ export class AppArtworks {
   baseUrl: URL;
   params = {
     country: 'JP',
-    media: 'music',
     entity: 'album',
     limit: '48',
-    lang: 'ja_jp',
-    explicit: 'Yes',
   };
 
   @Prop() keyword: string;
@@ -44,7 +41,7 @@ export class AppArtworks {
   async showArtworks() {
     const url = new URL(this.baseUrl.href);
     url.searchParams.append('term', this.keyword);
-    url.searchParams.append('dummy', nanoid(8));
+    url.searchParams.append('_', nanoid());
     const data = await this.getFromApi(url.href);
 
     this.artworks = data.map(item => {
