@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Watch, JSX } from '@stencil/core';
+import { Component, Host, h, Prop, State, Watch, JSX } from '@stencil/core';
 import { loadingController } from '@ionic/core';
 import { saveAs } from 'file-saver';
 import { nanoid } from 'nanoid';
@@ -14,7 +14,7 @@ export class AppArtworks {
     country: 'JP',
     media: 'music',
     entity: 'album',
-    limit: '50',
+    limit: '48',
     lang: 'ja_jp',
     explicit: 'Yes',
   };
@@ -67,6 +67,13 @@ export class AppArtworks {
   }
 
   render() {
-    return this.artworks;
+    return (
+      <Host>
+        {this.artworks}
+        {new Array(7).fill(null).map(() => {
+          return <div class="dummy"></div>;
+        })}
+      </Host>
+    );
   }
 }
