@@ -1,7 +1,8 @@
 import { Component, Host, h, Prop, State, Watch, JSX } from '@stencil/core';
 import { loadingController } from '@ionic/core';
+import axios from 'axios';
+import jsonpAdapter from 'axios-jsonp';
 import { saveAs } from 'file-saver';
-import { nanoid } from 'nanoid';
 
 @Component({
   tag: 'app-artworks',
@@ -9,43 +10,33 @@ import { nanoid } from 'nanoid';
   shadow: true,
 })
 export class AppArtworks {
-  baseUrl: URL;
-  params = {
-    country: 'JP',
-    media: 'music',
-    entity: 'album',
-    limit: '48',
-    lang: 'ja_jp',
-    explicit: 'Yes',
-  };
-
   @Prop() keyword: string;
   @State() artworks: JSX.Element;
 
-  constructor() {
-    this.baseUrl = new URL('https://itunes.apple.com/search');
-    for (const key in this.params) {
-      this.baseUrl.searchParams.append(key, this.params[key]);
-    }
-  }
-
-  async getFromApi(url) {
+  async getFromApi(keyword) {
     const loading = await loadingController.create({ message: '読み込み中…' });
     loading.present();
 
-    const res = await fetch(url);
-    const data = await res.json();
+    let res = await axios.get('https://itunes.apple.com/search', {
+      adapter: jsonpAdapter,
+      params: {
+        term: keyword,
+        country: 'JP',
+        media: 'music',
+        entity: 'album',
+        limit: '48',
+        lang: 'ja_jp',
+        explicit: 'Yes',
+      },
+    });
 
     loading.dismiss();
-    return data.results;
+    return res.data.results;
   }
 
   @Watch('keyword')
   async showArtworks() {
-    const url = new URL(this.baseUrl.href);
-    url.searchParams.append('term', this.keyword);
-    url.searchParams.append('dummy', nanoid(8));
-    const data = await this.getFromApi(url.href);
+    const data = await this.getFromApi(this.keyword);
 
     this.artworks = data.map(item => {
       const artworkUrl600 = item.artworkUrl100.replace('100x100', '600x600');
