@@ -1,4 +1,4 @@
 [build]
-publish = "www"
+publish = "www/"
 command = "npm run build"
 environment = { NODE_VERSION = "14.15.4" }
