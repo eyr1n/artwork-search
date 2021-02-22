@@ -47,12 +47,10 @@ img {
   height: 100%;
 }
 
-@media (max-width: 576px) {
-  .overlay {
-    display: none;
-  }
+.overlay.touch {
+  display: none;
+}
 
-  .touch-overlay {
-    display: block;
-  }
+.touch-overlay.touch {
+  display: block;
 }
