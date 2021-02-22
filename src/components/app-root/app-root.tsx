@@ -12,7 +12,7 @@ export class AppRoot {
     this.keyword = this.el.querySelector('ion-searchbar').value;
   }
 
-  componentDidRender() {
+  componentDidLoad() {
     this.el.querySelector('ion-searchbar').addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter') this.setKeyword();
     });
