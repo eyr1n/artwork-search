@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State, Watch, JSX } from '@stencil/core';
 import { loadingController } from '@ionic/core';
-import { saveAs } from 'file-saver';
+import download from 'downloadjs';
 import { nanoid } from 'nanoid';
 
 @Component({
@@ -53,7 +53,7 @@ export class AppArtworks {
             <ion-button size="small" href={artworkUrl600} target="_blank">
               <ion-icon slot="icon-only" name="eye"></ion-icon>
             </ion-button>
-            <ion-button size="small" onClick={() => saveAs(artworkUrl600)}>
+            <ion-button size="small" onClick={() => download(artworkUrl600)}>
               <ion-icon slot="icon-only" name="cloud-download"></ion-icon>
             </ion-button>
           </div>
