@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 import { loadingController } from '@ionic/core';
 import { nanoid } from 'nanoid';
 
