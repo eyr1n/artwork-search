@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
 import { loadingController } from '@ionic/core';
 import { nanoid } from 'nanoid';
 
@@ -8,15 +8,14 @@ import { nanoid } from 'nanoid';
   shadow: true,
 })
 export class AppArtworks {
+  @Prop() keyword: string;
+  private data = [];
   private baseUrl: URL;
   private params = {
     country: 'JP',
     entity: 'album',
     limit: '48',
   };
-
-  @Prop() keyword: string;
-  @State() data = [];
 
   constructor() {
     this.baseUrl = new URL('https://itunes.apple.com/search');
@@ -36,12 +35,13 @@ export class AppArtworks {
     return data.results;
   }
 
-  @Watch('keyword')
-  async showArtworks() {
+  componentWillUpdate() {
     const url = new URL(this.baseUrl.href);
     url.searchParams.append('term', this.keyword);
     url.searchParams.append('_', nanoid(8));
-    this.data = await this.getFromApi(url.href);
+    return this.getFromApi(url.href).then(data => {
+      this.data = data;
+    });
   }
 
   render() {
