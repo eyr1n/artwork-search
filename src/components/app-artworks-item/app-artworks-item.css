@@ -1,10 +1,9 @@
 :host {
   display: block;
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 8px;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8%;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   z-index: 1;
   overflow: hidden;
@@ -41,26 +40,19 @@ img {
 
 .touch-overlay {
   display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 576px) {
-  :host {
-    width: 75px;
-    height: 75px;
-    margin: 6px;
-    border-radius: 6px;
-  }
-
   .overlay {
     display: none;
   }
 
   .touch-overlay {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   }
 }

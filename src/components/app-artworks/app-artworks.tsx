@@ -45,19 +45,8 @@ export class AppArtworks {
   }
 
   render() {
-    return (
-      <Host>
-        {this.data.map(item => {
-          return <app-artworks-item url={item.artworkUrl100}></app-artworks-item>;
-        })}
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-        <div class="dummy"></div>
-      </Host>
-    );
+    return this.data.map(item => {
+      return <app-artworks-item url={item.artworkUrl100}></app-artworks-item>;
+    });
   }
 }
