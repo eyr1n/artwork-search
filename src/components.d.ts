@@ -9,7 +9,8 @@ export namespace Components {
     interface AppArtworks {
         "keyword": string;
     }
-    interface AppHome {
+    interface AppArtworksItem {
+        "url": string;
     }
     interface AppRoot {
     }
@@ -21,11 +22,11 @@ declare global {
         prototype: HTMLAppArtworksElement;
         new (): HTMLAppArtworksElement;
     };
-    interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
+    interface HTMLAppArtworksItemElement extends Components.AppArtworksItem, HTMLStencilElement {
     }
-    var HTMLAppHomeElement: {
-        prototype: HTMLAppHomeElement;
-        new (): HTMLAppHomeElement;
+    var HTMLAppArtworksItemElement: {
+        prototype: HTMLAppArtworksItemElement;
+        new (): HTMLAppArtworksItemElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -35,7 +36,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-artworks": HTMLAppArtworksElement;
-        "app-home": HTMLAppHomeElement;
+        "app-artworks-item": HTMLAppArtworksItemElement;
         "app-root": HTMLAppRootElement;
     }
 }
@@ -43,13 +44,14 @@ declare namespace LocalJSX {
     interface AppArtworks {
         "keyword"?: string;
     }
-    interface AppHome {
+    interface AppArtworksItem {
+        "url"?: string;
     }
     interface AppRoot {
     }
     interface IntrinsicElements {
         "app-artworks": AppArtworks;
-        "app-home": AppHome;
+        "app-artworks-item": AppArtworksItem;
         "app-root": AppRoot;
     }
 }
@@ -58,7 +60,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-artworks": LocalJSX.AppArtworks & JSXBase.HTMLAttributes<HTMLAppArtworksElement>;
-            "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-artworks-item": LocalJSX.AppArtworksItem & JSXBase.HTMLAttributes<HTMLAppArtworksItemElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
         }
     }

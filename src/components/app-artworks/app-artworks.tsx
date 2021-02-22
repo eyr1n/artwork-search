@@ -1,6 +1,5 @@
-import { Component, Host, h, Prop, State, Watch, JSX } from '@stencil/core';
+import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { loadingController } from '@ionic/core';
-import download from 'downloadjs';
 import { nanoid } from 'nanoid';
 
 @Component({
@@ -9,15 +8,15 @@ import { nanoid } from 'nanoid';
   shadow: true,
 })
 export class AppArtworks {
-  baseUrl: URL;
-  params = {
+  private baseUrl: URL;
+  private params = {
     country: 'JP',
     entity: 'album',
     limit: '48',
   };
 
   @Prop() keyword: string;
-  @State() artworks: JSX.Element;
+  @State() data = [];
 
   constructor() {
     this.baseUrl = new URL('https://itunes.apple.com/search');
@@ -41,35 +40,23 @@ export class AppArtworks {
   async showArtworks() {
     const url = new URL(this.baseUrl.href);
     url.searchParams.append('term', this.keyword);
-    url.searchParams.append('_', nanoid());
-    const data = await this.getFromApi(url.href);
-
-    this.artworks = data.map(item => {
-      const artworkUrl600 = item.artworkUrl100.replace('100x100', '600x600');
-      return (
-        <div class="artwork">
-          <img src={item.artworkUrl100}></img>
-          <div class="overlay">
-            <ion-button size="small" href={artworkUrl600} target="_blank">
-              <ion-icon slot="icon-only" name="eye"></ion-icon>
-            </ion-button>
-            <ion-button size="small" onClick={() => download(artworkUrl600)}>
-              <ion-icon slot="icon-only" name="cloud-download"></ion-icon>
-            </ion-button>
-          </div>
-          <a class="touch-overlay" href={artworkUrl600} target="_blank"></a>
-        </div>
-      );
-    });
+    url.searchParams.append('_', nanoid(8));
+    this.data = await this.getFromApi(url.href);
   }
 
   render() {
     return (
       <Host>
-        {this.artworks}
-        {new Array(7).fill(null).map(() => {
-          return <div class="dummy"></div>;
+        {this.data.map(item => {
+          return <app-artworks-item url={item.artworkUrl100}></app-artworks-item>;
         })}
+        <div class="dummy"></div>
+        <div class="dummy"></div>
+        <div class="dummy"></div>
+        <div class="dummy"></div>
+        <div class="dummy"></div>
+        <div class="dummy"></div>
+        <div class="dummy"></div>
       </Host>
     );
   }
