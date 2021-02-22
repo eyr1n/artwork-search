@@ -1,5 +1,6 @@
 {
   "name": "ジャケ画探すよ",
+  "short_name": "ジャケ画",
   "start_url": "/",
   "display": "standalone",
   "icons": [
