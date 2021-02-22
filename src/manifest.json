@@ -1,8 +1,15 @@
 {
   "name": "ジャケ画探すよ",
+  "short_name": "ジャケ画探すよ",
   "start_url": "/",
   "display": "standalone",
   "icons": [
+    {
+      "src": "assets/icon/regular_icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "assets/icon/maskable_icon.png",
       "sizes": "512x512",
