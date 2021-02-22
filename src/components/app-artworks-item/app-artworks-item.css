@@ -47,10 +47,12 @@ img {
   height: 100%;
 }
 
-.overlay.touch {
-  display: none;
-}
+@media (hover: none) and (pointer: coarse) {
+  .overlay {
+    display: none;
+  }
 
-.touch-overlay.touch {
-  display: block;
+  .touch-overlay {
+    display: block;
+  }
 }

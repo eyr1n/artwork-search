@@ -9,16 +9,12 @@ import download from 'downloadjs';
 export class AppArtworksItem {
   @Prop() url: string;
 
-  isTouchDevice() {
-    return 'ontouchstart' in window ? 'touch' : '';
-  }
-
   render() {
     const artworkUrl600 = this.url.replace('100x100', '600x600');
     return (
       <Host>
         <img src={this.url}></img>
-        <div class={`overlay ${this.isTouchDevice()}`}>
+        <div class="overlay">
           <ion-button size="small" href={artworkUrl600} target="_blank">
             <ion-icon slot="icon-only" name="eye"></ion-icon>
           </ion-button>
@@ -26,7 +22,7 @@ export class AppArtworksItem {
             <ion-icon slot="icon-only" name="cloud-download"></ion-icon>
           </ion-button>
         </div>
-        <a class={`touch-overlay ${this.isTouchDevice()}`} href={artworkUrl600} target="_blank"></a>
+        <a class="touch-overlay" href={artworkUrl600} target="_blank"></a>
       </Host>
     );
   }
