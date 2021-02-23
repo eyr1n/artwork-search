@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import download from 'downloadjs';
+import sanitize from 'sanitize-filename';
 
 @Component({
   tag: 'app-artworks-item',
@@ -8,6 +8,20 @@ import download from 'downloadjs';
 })
 export class AppArtworksItem {
   @Prop() url: string;
+  @Prop() name: string;
+
+  async downloadArtwork(url, name) {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = sanitize(`${name}.jpg`);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 
   render() {
     const artworkUrl600 = this.url.replace('100x100', '600x600');
@@ -18,7 +32,7 @@ export class AppArtworksItem {
           <ion-button size="small" href={artworkUrl600} target="_blank">
             <ion-icon slot="icon-only" name="eye"></ion-icon>
           </ion-button>
-          <ion-button size="small" onClick={() => download(artworkUrl600)}>
+          <ion-button size="small" onClick={() => this.downloadArtwork(artworkUrl600, this.name)}>
             <ion-icon slot="icon-only" name="cloud-download"></ion-icon>
           </ion-button>
         </div>

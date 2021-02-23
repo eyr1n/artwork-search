@@ -29,10 +29,10 @@ export class AppArtworks {
     loading.present();
 
     const res = await fetch(url);
-    const data = await res.json();
+    const json = await res.json();
 
     loading.dismiss();
-    return data.results;
+    return json.results;
   }
 
   componentWillUpdate() {
@@ -46,7 +46,7 @@ export class AppArtworks {
 
   render() {
     return this.#data.map(item => {
-      return <app-artworks-item url={item.artworkUrl100}></app-artworks-item>;
+      return <app-artworks-item url={item.artworkUrl100} name={item.collectionName}></app-artworks-item>;
     });
   }
 }

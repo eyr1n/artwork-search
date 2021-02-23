@@ -10,6 +10,7 @@ export namespace Components {
         "keyword": string;
     }
     interface AppArtworksItem {
+        "name": string;
         "url": string;
     }
     interface AppRoot {
@@ -45,6 +46,7 @@ declare namespace LocalJSX {
         "keyword"?: string;
     }
     interface AppArtworksItem {
+        "name"?: string;
         "url"?: string;
     }
     interface AppRoot {
