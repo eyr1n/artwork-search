@@ -15,7 +15,6 @@ export class AppArtworks {
     country: 'JP',
     entity: 'album',
     limit: '48',
-    lang: 'ja_jp',
   };
 
   constructor() {
