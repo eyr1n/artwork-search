@@ -12,9 +12,10 @@ export class AppArtworks {
   #data = [];
   #baseUrl: URL;
   #params = {
-    country: 'JP',
+    country: 'jp',
     entity: 'album',
     limit: '48',
+    lang: 'ja_jp',
   };
 
   constructor() {

@@ -17,7 +17,7 @@ export class AppArtworksItem {
 
     const a = document.createElement('a');
     a.href = blobUrl;
-    a.download = sanitize(`${name}.jpg`);
+    a.download = sanitize(`${name.slice(0, 50)}.jpg`);
     document.body.appendChild(a);
     a.click();
     a.remove();
