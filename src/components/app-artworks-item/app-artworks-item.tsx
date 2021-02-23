@@ -13,14 +13,11 @@ export class AppArtworksItem {
   async downloadArtwork(url, name) {
     const res = await fetch(url);
     const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
-    a.href = blobUrl;
-    a.download = sanitize(`${name.slice(0, 30)}.jpg`);
-    document.body.appendChild(a);
+    a.href = URL.createObjectURL(blob);
+    a.download = sanitize(`${name.slice(0, 40)}.jpg`);
     a.click();
-    a.remove();
   }
 
   render() {
