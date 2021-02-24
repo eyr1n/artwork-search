@@ -46,8 +46,8 @@ export class AppArtworks {
   }
 
   render() {
-    return this.#data.map(item => {
-      return <app-artworks-item url={item.artworkUrl100} name={item.collectionName}></app-artworks-item>;
+    return this.#data.map(({ collectionId, artworkUrl100, collectionName }) => {
+      return <app-artworks-item key={collectionId} url={artworkUrl100} name={collectionName}></app-artworks-item>;
     });
   }
 }

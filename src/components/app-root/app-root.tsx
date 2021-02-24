@@ -1,21 +1,16 @@
-import { Component, h, State, Element } from '@stencil/core';
+import { Component, h, State } from '@stencil/core';
 
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.css',
 })
 export class AppRoot {
-  @Element() el: HTMLElement;
   @State() keyword: string;
 
-  setKeyword() {
-    this.keyword = this.el.querySelector('ion-searchbar').value;
-  }
-
-  componentDidLoad() {
-    this.el.querySelector('ion-searchbar').addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') this.setKeyword();
-    });
+  setKeyword(e) {
+    if (e.key === 'Enter') {
+      this.keyword = e.currentTarget.value;
+    }
   }
 
   render() {
@@ -29,7 +24,7 @@ export class AppRoot {
 
         <ion-content class="ion-padding">
           <ion-grid fixed>
-            <ion-searchbar placeholder="検索"></ion-searchbar>
+            <ion-searchbar placeholder="検索" onKeyDown={e => this.setKeyword(e)}></ion-searchbar>
             <app-artworks keyword={this.keyword}></app-artworks>
           </ion-grid>
         </ion-content>
