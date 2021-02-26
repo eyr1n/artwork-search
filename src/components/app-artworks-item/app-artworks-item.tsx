@@ -1,5 +1,4 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import sanitize from 'sanitize-filename';
 
 @Component({
   tag: 'app-artworks-item',
@@ -10,13 +9,31 @@ export class AppArtworksItem {
   @Prop() url: string;
   @Prop() name: string;
 
+  getFileName(input) {
+    const replacements = {
+      illegal: [/[\/\?<>\\:\*\|"]/g, ''],
+      control: [/[\x00-\x1f\x80-\x9f]/g, ''],
+      reserved: [/^\.+$/, ''],
+      windowsReserved: [/^(con|prn|aux|nul|com[0-9]|lpt[0-9])(\..*)?$/i, ''],
+      windowsTrailing: [/[\. ]+$/, ''],
+      space: [/(\s|-)+/g, '_'],
+    };
+
+    let output = input;
+    for (const key in replacements) {
+      output = output.replace.apply(output, replacements[key]);
+    }
+
+    return `${output.slice(0, 40)}.jpg`;
+  }
+
   async downloadArtwork(url, name) {
     const res = await fetch(url);
     const blob = await res.blob();
 
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = sanitize(`${name.replace(/(\s|-)+/g, '_').slice(0, 40)}.jpg`);
+    a.download = this.getFileName(name);
     a.click();
   }
 

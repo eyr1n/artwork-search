@@ -1,6 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
 import { loadingController } from '@ionic/core';
-import { nanoid } from 'nanoid';
 
 @Component({
   tag: 'app-artworks',
@@ -11,17 +10,18 @@ export class AppArtworks {
   @Prop() keyword: string;
   #data = [];
   #baseUrl: URL;
-  #params = {
-    country: 'jp',
-    entity: 'album',
-    limit: '48',
-    lang: 'ja_jp',
-  };
 
   constructor() {
+    const params = {
+      country: 'jp',
+      entity: 'album',
+      limit: '48',
+      lang: 'ja_jp',
+    };
+
     this.#baseUrl = new URL('https://itunes.apple.com/search');
-    for (const key in this.#params) {
-      this.#baseUrl.searchParams.append(key, this.#params[key]);
+    for (const key in params) {
+      this.#baseUrl.searchParams.append(key, params[key]);
     }
   }
 
