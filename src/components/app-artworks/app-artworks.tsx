@@ -39,7 +39,7 @@ export class AppArtworks {
   componentWillUpdate() {
     const url = new URL(this.#baseUrl.href);
     url.searchParams.append('term', this.keyword);
-    url.searchParams.append('_', nanoid(8));
+    url.searchParams.append('_', Math.random().toString(36).slice(-8));
     return this.getFromApi(url.href).then(data => {
       this.#data = data;
     });
